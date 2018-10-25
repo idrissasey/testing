@@ -1,3 +1,4 @@
+package testIntegration;
 
 
 import java.util.Random;
@@ -50,7 +51,8 @@ public class MyPoint {
 	 * @param newX The new X coordinate. Must be valid (not equal Double.NaN), otherwise nothing is done.
 	 */
 	public void setX(final double newX) {
-		x = newX;
+		if (this != null)
+			this.x = newX;
 	}
 
 
@@ -59,7 +61,8 @@ public class MyPoint {
 	 * @param newY The new Y coordinate. Must be valid (not equal Double.NaN), otherwise nothing is done.
 	 */
 	public void setY(final double newY) {
-		y = newY;
+		if (this != null)
+			this.y = newY;
 	}
 
 
@@ -108,6 +111,7 @@ public class MyPoint {
 	 * @return The angle or NaN if the given point null.
 	 */
 	public double computeAngle(final MyPoint pt) {
+		if(pt == null) throw new IllegalArgumentException();
 		double angle;
 		final double x2 = pt.getX() - x;
 		final double y2 = pt.getY() - y;
@@ -134,14 +138,14 @@ public class MyPoint {
 	 * @since 1.9
 	 */
 	public MyPoint rotatePoint(final MyPoint gravityC, final double theta) {
-		if(gravityC == null) return null;
+		if(gravityC == null) throw new IllegalArgumentException();
 
 		final MyPoint pt = new MyPoint();
 		double cosTheta;
 		double sinTheta;
 		double angle = theta;
 		final double gx = gravityC.getX();
-		final double gy = gravityC.getX();
+		final double gy = gravityC.getY();
 
 		if(angle < 0d) {
 			angle = 2d * PI + angle;
@@ -180,7 +184,7 @@ public class MyPoint {
 	 */
 	public MyPoint centralSymmetry(final MyPoint centre) {
 		if(centre == null) throw new IllegalArgumentException();
-		return rotatePoint(centre, 2d * Math.PI);
+		return this.rotatePoint(centre, 2d * Math.PI);
 	}
 
 
@@ -189,6 +193,7 @@ public class MyPoint {
 	 * @return The middle point of the current and given points.
 	 */
 	public MyPoint getMiddlePoint(final MyPoint p) {
+		if(p == null) throw new IllegalArgumentException();
 		return new MyPoint((x + p.getX()) / 2d, (y + p.getY()) / 2d);
 	}
 
@@ -211,8 +216,10 @@ public class MyPoint {
 	 * @param random2 The random number generator used for y.
 	 */
 	public void setPoint(final Random random1, final Random random2) {
-		setX(random1.nextInt());
-		setY(random2.nextInt());
+		if(random1 == null || random2 == null) throw new IllegalArgumentException();
+			setX(random1.nextInt());
+			setY(random2.nextInt());
+	
 	}
 
 
