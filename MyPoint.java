@@ -1,4 +1,4 @@
-package main.fr.ut2j.m1ice.ootesting;
+
 
 import java.util.Random;
 
@@ -59,7 +59,7 @@ public class MyPoint {
 	 * @param newY The new Y coordinate. Must be valid (not equal Double.NaN), otherwise nothing is done.
 	 */
 	public void setY(final double newY) {
-		x = newY;
+		y = newY;
 	}
 
 
